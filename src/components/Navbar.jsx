@@ -10,11 +10,11 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const handleLogout = async () => {
     try {
-      await axios.post(BASE_URL + "/logout", { withCredentials: true });
+      await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
       dispatch(removeUser());
       return navigate("/login");
-
     } catch (err) {
+      console.log(err.message);
     }
   };
   return (
@@ -43,9 +43,7 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <Link to="/profile">
-                  Profile
-                </Link>
+                <Link to="/profile">Profile</Link>
               </li>
               <li>
                 <a>Settings</a>

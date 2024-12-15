@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import UserCard from "./UserCard";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
@@ -18,7 +18,6 @@ const Feed = () => {
     } catch (err) {
       console.log(err.message);
     }
-    console.log(feed, "feed .....11111111");
   };
   useEffect(() => {
     fetchFeed();

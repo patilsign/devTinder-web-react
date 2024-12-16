@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import axios from "axios";
-import { removeUser } from "./store/UserSlice";
+import { removeUser } from "./store/userSlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user);
@@ -46,7 +46,10 @@ const Navbar = () => {
                 <Link to="/profile">Profile</Link>
               </li>
               <li>
-                <a>Settings</a>
+              <Link to="/requests">Requests</Link>
+              </li>
+              <li>
+              <Link to="/connections">Connections</Link>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>

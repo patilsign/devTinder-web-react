@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
-import { addUser, removeUser } from "./store/UserSlice";
+import { addUser } from "./store/UserSlice";
 
 const Body = () => {
   const dispatch = useDispatch();

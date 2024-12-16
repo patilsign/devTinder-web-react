@@ -2,7 +2,6 @@
 import React from "react";
 
 const UserCard = ({ card }) => {
-  console.log(card, "1111111122222222 feeed");
   const { firstName, lastName, about, photoUrl } = card;
   return (
     <div className="flex justify-center m-5">

@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import UserCard from "./UserCard";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
-import { addUser } from "./store/UserSlice";
+import { addUser } from "./store/userSlice";
 
 const EditProfile = ({ user }) => {
-  console.log(user, "-------33333");
-
   const [toastMsg, setToastMsg] = useState(false);
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
@@ -22,12 +20,11 @@ const EditProfile = ({ user }) => {
         { firstName, lastName, about, photoUrl },
         { withCredentials: true }
       );
-      console.log(res, "000000000");
       dispatch(addUser(res?.data?.data));
       setToastMsg(true);
-      setTimeout(()=>{
-          setToastMsg(false);
-      },3000)
+      setTimeout(() => {
+        setToastMsg(false);
+      }, 3000);
     } catch (err) {
       console.log(err.response);
     }

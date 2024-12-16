@@ -2,7 +2,7 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequests } from "./store/requestSlice";
+import { addRequests, removeRequest } from "./store/requestSlice";
 
 const Requests = () => {
   const dispatch = useDispatch();
@@ -13,6 +13,16 @@ const Requests = () => {
     });
     dispatch(addRequests(res?.data?.data));
   };
+
+  const reviewRequest = async (status, userId) => {
+    const res = await axios.post(
+      BASE_URL + "/replyConnectionRequest/" + status + "/" + userId,
+      {},
+      { withCredentials: true }
+    );
+    dispatch(removeRequest(userId));
+  };
+
   useEffect(() => {
     fetchRequests();
   }, []);
@@ -36,11 +46,10 @@ const Requests = () => {
         </h1>
 
         {requests.map((request) => {
-          const { _id, firstName, lastName, photoUrl, about } =
+          const { firstName, lastName, photoUrl, about } =
             request.fromUserId;
-
           return (
-            <div key={_id} className="justify-center m-5 bg-base-200">
+            <div key={request?._id} className="justify-center m-5 bg-base-200">
               <div className="m-5 text-center items-center">
                 <img
                   className="w-[100px] rounded-full m-auto"
@@ -53,10 +62,16 @@ const Requests = () => {
                 <p>{about}</p>
               </div>
               <div>
-                <button className="btn btn-active btn-primary m-2">
+                <button
+                  className="btn btn-active btn-primary m-2"
+                  onClick={() => reviewRequest("accepted", request?._id)}
+                >
                   Accept
                 </button>
-                <button className="btn btn-active btn-secondary m-2">
+                <button
+                  className="btn btn-active btn-secondary m-2"
+                  onClick={() => reviewRequest("rejected", request?._id)}
+                >
                   Reject
                 </button>
               </div>

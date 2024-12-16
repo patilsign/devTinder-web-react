@@ -23,6 +23,17 @@ const Feed = () => {
     fetchFeed();
   }, []);
 
+  if (!feed) return;
+
+  if (feed.length === 0) {
+    return (
+      <div className="flex justify-center">
+        <div className="my-5 bg-base-300 w-1/2">
+          <h1 className="text-center m-2 text-white">No Feeds More....</h1>
+        </div>
+      </div>
+    );
+  }
   return (
     feed && (
       <div className="justify-center flex my-5">

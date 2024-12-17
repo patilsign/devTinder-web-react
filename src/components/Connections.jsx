@@ -35,13 +35,13 @@ const Connections = () => {
   }
   return (
     connections && (
-      <div className="flex justify-center">
-        <div className="my-5 bg-base-300 w-1/2">
+      <div className="flex justify-center ">
+        <div className="my-5 w-1/2 bg-base-300">
           <h1 className="text-center m-2 text-white">Connections</h1>
           {connections.map((connection, index) => {
             const { firstName, lastName, about, photoUrl } = connection;
             return (
-              <div key={index} className="flex p-5 items-center bg-base-200">
+              <div key={index} className="flex p-5 items-center bg-base-100 m-3">
                 <div className="w-3/12 mx-5 ">
                   <img
                     className="w-1/2 rounded-full"

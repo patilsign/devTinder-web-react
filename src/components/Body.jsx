@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Navbar from "./Navbar";
 import { Outlet, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
-import { addUser } from "./store/UserSlice";
+import { addUser } from "./store/userSlice";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const Body = () => {
       const res = await axios.get(BASE_URL + "/profile/view", {
         withCredentials: true,
       });
-      dispatch(addUser(res.data));
+      dispatch(addUser(res?.data?.data));
     } catch (err) {
       if (err.status === 401) {
         navigate("/login");
@@ -33,7 +33,9 @@ const Body = () => {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <div className="overflow-hidden">
+        <Outlet />
+      </div>
       <Footer />
     </>
   );

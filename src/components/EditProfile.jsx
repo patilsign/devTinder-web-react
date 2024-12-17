@@ -31,6 +31,7 @@ const EditProfile = ({ user }) => {
   };
 
   return (
+          <>
     <div className="flex justify-center bg-base-200 my-5">
       <div className="flex justify-center m-5">
         <label className="form-control w-full max-w-xs">
@@ -88,6 +89,7 @@ const EditProfile = ({ user }) => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

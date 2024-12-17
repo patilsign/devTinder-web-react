@@ -3,11 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import axios from "axios";
 import { removeUser } from "./store/userSlice";
+import { removeFeed } from "./store/feedSlice";
+import { removeConnection } from "./store/connectionSlice";
+import { removeRequest } from "./store/requestSlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleLogout = async () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
@@ -17,6 +21,7 @@ const Navbar = () => {
       console.log(err.message);
     }
   };
+  
   return (
     <div className="navbar bg-base-300">
       <div className="flex-1">
@@ -27,7 +32,7 @@ const Navbar = () => {
       {user && (
         <div className="flex-none gap-2">
           <div className="form-control"></div>
-          Welcome {user?.data?.firstName}
+          Welcome {user?.firstName}
           <div className="dropdown dropdown-end mx-4">
             <div
               tabIndex={0}
@@ -35,7 +40,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img alt="alt-url" src={user?.data?.photoUrl} />
+                <img alt="alt-url" src={user?.photoUrl} />
               </div>
             </div>
             <ul
@@ -46,10 +51,10 @@ const Navbar = () => {
                 <Link to="/profile">Profile</Link>
               </li>
               <li>
-              <Link to="/requests">Requests</Link>
+                <Link to="/requests">Requests</Link>
               </li>
               <li>
-              <Link to="/connections">Connections</Link>
+                <Link to="/connections">Connections</Link>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>
